@@ -84,8 +84,8 @@ function Dueler:Duel(dueler1, dueler2)
     local dueler1pos = duelpoint + vectorOffset
     local dueler2pos = duelpoint - vectorOffset
 
-    dueler1:AddNewModifier(dueler1, nil, "dueler_movement", {x = dueler1pos.x, y = dueler1pos.y})
-    dueler2:AddNewModifier(dueler2, nil, "dueler_movement", {x = dueler1pos.x, y = dueler1pos.y})
+    dueler1:AddNewModifier(dueler1, nil, "dueler_movement", {x = dueler1pos.x, y = dueler1pos.y, target = dueler2:entindex()})
+    dueler2:AddNewModifier(dueler2, nil, "dueler_movement", {x = dueler1pos.x, y = dueler1pos.y, target = dueler1:entindex()})
 end
 
 

@@ -8,17 +8,18 @@ function dueler_movement:OnCreated(kv)
 	--variables
     self.time_elapsed = 0
     self:SetStackCount(math.random(10))
+    self.target = kv.target
 
 	-- Wait one frame to get the target point from the ability's OnSpellStart, then calculate distance
     Timers:CreateTimer(FrameTime(), function()
         self.target_point = Vector(kv.x, kv.y, GetGroundHeight(self:GetParent():GetAbsOrigin(), self:GetParent()))
         self.distance = (self:GetCaster():GetAbsOrigin() - self.target_point):Length2D()
-        self.dash_time = 4
+        self.dash_time = BUTTINGS.DASH_TIME or 2
         self.dash_speed = self.distance / self.dash_time
         self.direction = (self.target_point - self:GetCaster():GetAbsOrigin()):Normalized()
 
 		--Add dash particle
-		local dash = ParticleManager:CreateParticle("particles/units/heroes/hero_pangolier/pangolier_swashbuckler_dash.vpcf", PATTACH_WORLDORIGIN, self:GetParent())
+		local dash = ParticleManager:CreateParticle("particles/units/heroes/hero_pangolier/pangolier_swashbuckler_dash.vpcf", PATTACH_ABSORIGIN_FOLLOW, self:GetParent())
 		ParticleManager:SetParticleControl(dash, 0, self:GetCaster():GetAbsOrigin()) -- point 0: origin, point 2: sparkles, point 5: burned soil
 		self:AddParticle(dash, false, false, -1, true, false)
 
@@ -59,7 +60,8 @@ function dueler_movement:HorizontalMotion(me, dt)
 		if self.time_elapsed < self.dash_time then
 
 			-- Go forward
-			local new_location = self:GetCaster():GetAbsOrigin() + self.direction * self.dash_speed * dt
+            local new_location = self:GetCaster():GetAbsOrigin() + self.direction * self.dash_speed * dt
+            new_location.z = GetGroundHeight(self:GetParent():GetAbsOrigin(), self:GetParent())
 			self:GetCaster():SetAbsOrigin(new_location)
 		else
 			self:Destroy()
@@ -71,6 +73,20 @@ function dueler_movement:OnRemoved()
     if IsClient() then return end
     FindClearSpaceForUnit(self:GetParent(), self:GetParent():GetAbsOrigin(), true)
 
+    local ability = self:GetParent():FindAbilityByName("duel_modified")
+    if ability then
+        self:GetParent():SetCursorCastTarget(EntIndexToHScript(self.target))
+        ability:OnSpellStart()
+    end
+end
+
+-- Modifier Effects
+function dueler_movement:DeclareFunctions()
+	local funcs = {
+		MODIFIER_PROPERTY_OVERRIDE_ANIMATION,
+	}
+
+	return funcs
 end
 
 function dueler_movement:GetOverrideAnimation( params )

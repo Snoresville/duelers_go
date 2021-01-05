@@ -49,6 +49,7 @@ BUTTINGS = {
 	BUYBACK_COOLDOWN = 600,             -- Cooldown for buyback
 
 	DUEL_DELAY = 10,					-- Delay between duels in seconds.
+	DASH_TIME = 3,						-- How long heroes have to travel to duel their opponent.
 }
 
 function BUTTINGS.ALTERNATIVE_XP_TABLE()	-- xp values if MAX_LEVEL is different than 30

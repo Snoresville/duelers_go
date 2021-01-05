@@ -173,6 +173,12 @@
 									 maxchars="5" unit="s"/>
 						<Label text="Duel Delay" class="TextEntryLabel"/>
 					</Panel>
+					<Panel class="SettingsItem TextEntryFrame">
+						<TextEntry onfocus="onfocus('DASH_TIME')" oninputsubmit="onPanelChange('DASH_TIME')"
+									 onblur="onPanelChange('DASH_TIME')" id="DASH_TIME" class="SettingsItem"
+									 maxchars="5" unit="s"/>
+						<Label text="Dash Time" class="TextEntryLabel"/>
+					</Panel>
 				</Panel>
 				<!-- <Panel class="SettingsElement"> -->
 				<!-- <Label class="SettingsElementTitle" text="Bots?"/> -->

@@ -80,4 +80,28 @@
 		"ItemInitialStockTime"			"0"
 		"ItemInitialStockTimeTurbo"		"0"
 	}
+	"duel_modified"
+    {
+        "BaseClass"	"legion_commander_duel"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"duration"				"5"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"duration_scepter"		"5"
+				"RequiresScepter"	"1"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"reward_damage"			"15"
+			}
+		}
+    }
 }
