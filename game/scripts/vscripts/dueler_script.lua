@@ -19,7 +19,7 @@ function Dueler:Trigger()
                                         FIND_UNITS_EVERYWHERE, 
                                         DOTA_UNIT_TARGET_TEAM_FRIENDLY, 
                                         DOTA_UNIT_TARGET_HERO, 
-                                        DOTA_UNIT_TARGET_FLAG_INVULNERABLE + DOTA_UNIT_TARGET_FLAG_OUT_OF_WORLD + DOTA_UNIT_TARGET_FLAG_NOT_ILLUSIONS, 
+                                        DOTA_UNIT_TARGET_FLAG_NOT_ILLUSIONS, 
                                         FIND_ANY_ORDER, false)
     Dueler.dire = FindUnitsInRadius(    DOTA_TEAM_BADGUYS, 
                                         Vector(0,0,0), 
@@ -27,7 +27,7 @@ function Dueler:Trigger()
                                         FIND_UNITS_EVERYWHERE, 
                                         DOTA_UNIT_TARGET_TEAM_FRIENDLY, 
                                         DOTA_UNIT_TARGET_HERO, 
-                                        DOTA_UNIT_TARGET_FLAG_INVULNERABLE + DOTA_UNIT_TARGET_FLAG_OUT_OF_WORLD + DOTA_UNIT_TARGET_FLAG_NOT_ILLUSIONS,
+                                        DOTA_UNIT_TARGET_FLAG_NOT_ILLUSIONS,
                                         FIND_ANY_ORDER, false)
 
     -- Iteration of duels

@@ -100,7 +100,8 @@
 			"03"
 			{
 				"var_type"				"FIELD_INTEGER"
-				"reward_damage"			"15"
+				"reward_damage"			"10"
+				"LinkedSpecialBonus"	"special_bonus_unique_legion_commander"
 			}
 		}
     }

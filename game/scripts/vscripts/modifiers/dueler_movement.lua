@@ -4,6 +4,7 @@ dueler_movement = dueler_movement or class({})
 function dueler_movement:OnCreated(kv)
     if IsClient() then return end
     self:GetParent():EmitSound("Hero_Pangolier.Gyroshell.Stop")
+    ProjectileManager:ProjectileDodge(self:GetParent())
 
 	--variables
     self.time_elapsed = 0
@@ -20,7 +21,9 @@ function dueler_movement:OnCreated(kv)
 
 		--Add dash particle
 		local dash = ParticleManager:CreateParticle("particles/units/heroes/hero_pangolier/pangolier_swashbuckler_dash.vpcf", PATTACH_ABSORIGIN_FOLLOW, self:GetParent())
-		ParticleManager:SetParticleControl(dash, 0, self:GetCaster():GetAbsOrigin()) -- point 0: origin, point 2: sparkles, point 5: burned soil
+        ParticleManager:SetParticleControl(dash, 0, self:GetParent():GetAbsOrigin()) -- point 0: origin, point 2: sparkles, point 5: burned soil
+        ParticleManager:SetParticleControl(dash, 2, self:GetParent():GetAbsOrigin()) -- point 0: origin, point 2: sparkles, point 5: burned soil
+        ParticleManager:SetParticleControl(dash, 5, self:GetParent():GetAbsOrigin()) -- point 0: origin, point 2: sparkles, point 5: burned soil
 		self:AddParticle(dash, false, false, -1, true, false)
 
         self.frametime = FrameTime()
@@ -35,6 +38,7 @@ function dueler_movement:CheckState()
         [MODIFIER_STATE_STUNNED] = true,
         [MODIFIER_STATE_NO_UNIT_COLLISION] = true,
         [MODIFIER_STATE_FLYING_FOR_PATHING_PURPOSES_ONLY] = true,
+        [MODIFIER_STATE_ATTACK_IMMUNE] = true,
     }
 
 	return state
