@@ -14,7 +14,7 @@ function dueler_movement:OnCreated(kv)
     Timers:CreateTimer(FrameTime(), function()
         self.target_point = Vector(kv.x, kv.y, GetGroundHeight(self:GetParent():GetAbsOrigin(), self:GetParent()))
         self.distance = (self:GetCaster():GetAbsOrigin() - self.target_point):Length2D()
-        self.dash_time = BUTTINGS.DASH_TIME or 2
+        self.dash_time = math.min(BUTTINGS.DASH_TIME or 2, BUTTINGS.DUEL_DELAY - 5) -- prevents yeeting mid-duel
         self.dash_speed = self.distance / self.dash_time
         self.direction = (self.target_point - self:GetCaster():GetAbsOrigin()):Normalized()
 
