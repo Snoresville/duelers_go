@@ -10,10 +10,14 @@ local bonusabilities = {
 	-- roshan_spell_block = { lvl = 4, nokey = true },
 	duel_modified = { lvl = 1, cd = 120 , nokey = true, hidden = true, cast = false },
 	legion_commander_press_the_attack = { lvl = 4, cd = 999, nokey = true, hidden = true, cast = false }
+	cask_projectile = { lvl = 1, cd = 9999 , nokey = true, hidden = true },
 }
 local bonusmodifier = {
 	-- examplemodifier = {duration = 3}, -- this adds a duration to the modifier.
 	-- examplemodifier = {},  -- this makes it so that its permanent
+	cask_chance = {},
+	cask_bounces = {},
+	cast_range_mod = {duration = 0.01}
 }
 local talents = {
 	[8] = "",	[7] = "",
@@ -32,6 +36,7 @@ ListenToGameEvent("npc_first_spawn",function(kv)
 	-- Abilities
 
 	for abil,kv in pairs(bonusabilities) do
+		if abil == "cask_projectile" and (BUTTINGS.MEME == nil or BUTTINGS.MEME == 0) then break end
 		if (not kv.nokey) then hero:RemoveAbility("generic_hidden") end
 		local a = hero:AddAbility(abil)
 		a:SetLevel(kv.level or kv.lvl or 0)

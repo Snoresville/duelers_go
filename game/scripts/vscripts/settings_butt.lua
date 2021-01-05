@@ -50,6 +50,17 @@ BUTTINGS = {
 
 	DUEL_DELAY = 30,					-- Delay between duels in seconds.
 	DASH_TIME = 3,						-- How long heroes have to travel to duel their opponent.
+
+	MEME = 0,
+
+	CASK_CHANCE_BASE = 15,				-- Base Chance for cask to be released
+	CASK_BOUNCE_BASE = 3,				-- Amount of bounces
+	
+	CASK_CHANCE_LEVEL = 1,				-- 
+	CASK_BOUNCE_LEVEL = 1,
+
+	CASK_CHANCE_LIMIT = 30,
+	CASK_BOUNCE_LIMIT = 9,
 }
 
 function BUTTINGS.ALTERNATIVE_XP_TABLE()	-- xp values if MAX_LEVEL is different than 30

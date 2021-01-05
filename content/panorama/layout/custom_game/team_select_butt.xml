@@ -179,6 +179,8 @@
 									 maxchars="5" unit="s"/>
 						<Label text="Dash Time" class="TextEntryLabel"/>
 					</Panel>
+					<ToggleButton id="MEME" class="SettingsItem" text="Meme"
+									onactivate="onPanelChange('MEME')"/>
 				</Panel>
 				<!-- <Panel class="SettingsElement"> -->
 				<!-- <Label class="SettingsElementTitle" text="Bots?"/> -->
