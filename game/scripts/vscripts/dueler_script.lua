@@ -19,7 +19,7 @@ function Dueler:Trigger()
                                         FIND_UNITS_EVERYWHERE, 
                                         DOTA_UNIT_TARGET_TEAM_FRIENDLY, 
                                         DOTA_UNIT_TARGET_HERO, 
-                                        DOTA_UNIT_TARGET_FLAG_INVULNERABLE + DOTA_UNIT_TARGET_FLAG_OUT_OF_WORLD, 
+                                        DOTA_UNIT_TARGET_FLAG_INVULNERABLE + DOTA_UNIT_TARGET_FLAG_OUT_OF_WORLD + DOTA_UNIT_TARGET_FLAG_NOT_ILLUSIONS, 
                                         FIND_ANY_ORDER, false)
     Dueler.dire = FindUnitsInRadius(    DOTA_TEAM_BADGUYS, 
                                         Vector(0,0,0), 
@@ -27,7 +27,7 @@ function Dueler:Trigger()
                                         FIND_UNITS_EVERYWHERE, 
                                         DOTA_UNIT_TARGET_TEAM_FRIENDLY, 
                                         DOTA_UNIT_TARGET_HERO, 
-                                        DOTA_UNIT_TARGET_FLAG_INVULNERABLE + DOTA_UNIT_TARGET_FLAG_OUT_OF_WORLD,
+                                        DOTA_UNIT_TARGET_FLAG_INVULNERABLE + DOTA_UNIT_TARGET_FLAG_OUT_OF_WORLD + DOTA_UNIT_TARGET_FLAG_NOT_ILLUSIONS,
                                         FIND_ANY_ORDER, false)
 
     -- Iteration of duels
@@ -48,13 +48,13 @@ function Dueler:Duel(dueler1, dueler2)
             print("WE CALLED DUEL WITH NO DUELERS??")
             return 
         end
-
+        local targetFlag = DOTA_UNIT_TARGET_BASIC --+ DOTA_UNIT_TARGET_BUILDING
         dueler2 = FindUnitsInRadius( dueler1:GetTeamNumber(), 
                                 Vector(0,0,0), 
                                 nil, 
                                 FIND_UNITS_EVERYWHERE, 
                                 DOTA_UNIT_TARGET_TEAM_ENEMY, 
-                                DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_BUILDING, 
+                                targetFlag, 
                                 DOTA_UNIT_TARGET_FLAG_INVULNERABLE + DOTA_UNIT_TARGET_FLAG_OUT_OF_WORLD + DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, 
                                 FIND_ANY_ORDER, false)[1]
         if dueler2 == nil then
@@ -83,6 +83,17 @@ function Dueler:Duel(dueler1, dueler2)
 
     local dueler1pos = duelpoint + vectorOffset
     local dueler2pos = duelpoint - vectorOffset
+
+    if dueler1:FindAbilityByName("duel_modified") == nil then
+        local a = dueler1:AddAbility("duel_modified")
+		a:SetLevel(1)
+		a:SetHidden(true)
+    end
+    if dueler2:FindAbilityByName("duel_modified") == nil then
+        local a = dueler2:AddAbility("duel_modified")
+		a:SetLevel(1)
+		a:SetHidden(true)
+    end
 
     dueler1:AddNewModifier(dueler1, nil, "dueler_movement", {x = dueler1pos.x, y = dueler1pos.y, target = dueler2:entindex()})
     dueler2:AddNewModifier(dueler2, nil, "dueler_movement", {x = dueler1pos.x, y = dueler1pos.y, target = dueler1:entindex()})

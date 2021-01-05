@@ -35,7 +35,6 @@ function dueler_movement:CheckState()
         [MODIFIER_STATE_STUNNED] = true,
         [MODIFIER_STATE_NO_UNIT_COLLISION] = true,
         [MODIFIER_STATE_FLYING_FOR_PATHING_PURPOSES_ONLY] = true,
-        [MODIFIER_STATE_INVULNERABLE] = true
     }
 
 	return state
@@ -74,7 +73,7 @@ function dueler_movement:OnRemoved()
     FindClearSpaceForUnit(self:GetParent(), self:GetParent():GetAbsOrigin(), true)
 
     local ability = self:GetParent():FindAbilityByName("duel_modified")
-    if ability then
+    if ability and not self:GetParent():HasModifier("modifier_legion_commander_duel") then
         self:GetParent():SetCursorCastTarget(EntIndexToHScript(self.target))
         ability:OnSpellStart()
     end
