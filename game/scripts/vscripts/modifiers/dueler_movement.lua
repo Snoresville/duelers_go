@@ -8,7 +8,7 @@ function dueler_movement:OnCreated(kv)
 
 	--variables
     self.time_elapsed = 0
-    self:SetStackCount(math.random(10))
+    self:SetStackCount(math.random(6))
     self.target = kv.target
 
 	-- Wait one frame to get the target point from the ability's OnSpellStart, then calculate distance
@@ -96,13 +96,9 @@ function dueler_movement:GetOverrideAnimation( params )
     local anims = {
         ACT_DOTA_IDLE_RARE,
         ACT_DOTA_RUN,
-        ACT_DOTA_DIE,
-        ACT_DOTA_FLINCH,
         ACT_DOTA_DISABLED,
-        ACT_DOTA_TELEPORT,
         ACT_DOTA_VICTORY,
         ACT_DOTA_DEFEAT,
-        ACT_DOTA_SPAWN,
         ACT_DOTA_FLAIL,
     }
 
