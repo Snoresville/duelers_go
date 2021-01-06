@@ -35,10 +35,11 @@ end
 --pangolier is stunned during the dash
 function dueler_movement:CheckState()
 	state = {
-        [MODIFIER_STATE_STUNNED] = true,
+        [MODIFIER_STATE_ROOTED] = true,
         [MODIFIER_STATE_NO_UNIT_COLLISION] = true,
         [MODIFIER_STATE_FLYING_FOR_PATHING_PURPOSES_ONLY] = true,
         [MODIFIER_STATE_ATTACK_IMMUNE] = true,
+        [MODIFIER_STATE_DISARMED] = true,
     }
 
 	return state

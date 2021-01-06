@@ -4,6 +4,7 @@ ListenToGameEvent("game_rules_state_game_in_progress", function()
     if IsClient() then return end
 
     print("Dueling may now commence")
+    BUTTINGS.DUEL_DELAY = math.max(BUTTINGS.DUEL_DELAY, 1 + 5)
 	Timers:CreateTimer( BUTTINGS.DUEL_DELAY or 15, Dueler.Trigger )
 end, GameMode)
 
