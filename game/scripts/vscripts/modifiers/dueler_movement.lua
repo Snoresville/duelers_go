@@ -74,6 +74,7 @@ end
 
 function dueler_movement:OnRemoved()
     if IsClient() then return end
+    GridNav:DestroyTreesAroundPoint(self:GetParent():GetAbsOrigin(), 75, false)
     FindClearSpaceForUnit(self:GetParent(), self:GetParent():GetAbsOrigin(), true)
 
     local ability = self:GetParent():FindAbilityByName("duel_modified")
