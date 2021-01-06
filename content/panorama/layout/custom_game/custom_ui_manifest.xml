@@ -6,7 +6,7 @@
 		// Credits: EarthSalamander #42
 		// Hide vanilla pick screen in loading screen
 		HidePickScreen()
-		TitleFuckery()
+		TitleFuckery();
 
 		function HidePickScreen() {
 			if (!Game.GameStateIs(3)) {
@@ -20,8 +20,12 @@
 		}
 
 		function TitleFuckery(){
-			if (Game.GetState() < DOTA_GameState.DOTA_GAMERULES_STATE_HERO_SELECTION){
+			$.Msg("asdasdjhasdjasd")
+			if (FindDotaHudElement("UnassignedPlayersHeader")){
 				FindDotaHudElement("UnassignedPlayersHeader").Children()[0].text = "UNASSIGNED PENISES"
+			}
+			else{
+				$.Schedule(0.1, TitleFuckery)
 			}
 		}
 		
