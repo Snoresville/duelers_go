@@ -6,15 +6,22 @@
 		// Credits: EarthSalamander #42
 		// Hide vanilla pick screen in loading screen
 		HidePickScreen()
-		FindDotaHudElement("UnassignedPlayersHeader").Children()[0].text = "UNASSIGNED PENISES"
+		TitleFuckery()
 
 		function HidePickScreen() {
 			if (!Game.GameStateIs(3)) {
 				FindDotaHudElement("PreGame").style.opacity = "0";
+				
 				$.Schedule(1.0, HidePickScreen)
 			}
 			else {
 				FindDotaHudElement("PreGame").style.opacity = "1";
+			}
+		}
+
+		function TitleFuckery(){
+			if (Game.GetState() < DOTA_GameState.DOTA_GAMERULES_STATE_HERO_SELECTION){
+				FindDotaHudElement("UnassignedPlayersHeader").Children()[0].text = "UNASSIGNED PENISES"
 			}
 		}
 		
