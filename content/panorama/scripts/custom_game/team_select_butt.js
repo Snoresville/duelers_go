@@ -38,7 +38,7 @@ function uniqueID() {
 	if ($("#Host")) {
 		for (let i of Game.GetAllPlayerIDs()) {
 			if ( Game.GetPlayerInfo(i) && Game.GetPlayerInfo(i).player_has_host_privileges) {
-				$("#Host").text = "HOST: " + Players.GetPlayerName( i );
+				$("#Host").text = "BIG BOY: " + Players.GetPlayerName( i );
 			}
 		}
 	} else {

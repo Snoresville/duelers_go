@@ -6,6 +6,7 @@
 		// Credits: EarthSalamander #42
 		// Hide vanilla pick screen in loading screen
 		HidePickScreen()
+		FindDotaHudElement("UnassignedPlayersHeader").Children()[0].text = "UNASSIGNED PENISES"
 
 		function HidePickScreen() {
 			if (!Game.GameStateIs(3)) {
