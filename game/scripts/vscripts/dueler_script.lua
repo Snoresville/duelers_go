@@ -48,7 +48,10 @@ function Dueler:Duel(dueler1, dueler2)
             print("WE CALLED DUEL WITH NO DUELERS??")
             return 
         end
-        local targetFlag = DOTA_UNIT_TARGET_BASIC --+ DOTA_UNIT_TARGET_BUILDING
+        local targetFlag = DOTA_UNIT_TARGET_BASIC --+ 
+        if BUTTINGS.DUEL_BUILDINGS == 1 then
+            targetFlag = targetFlag + DOTA_UNIT_TARGET_BUILDING
+        end
         dueler2 = FindUnitsInRadius( dueler1:GetTeamNumber(), 
                                 Vector(0,0,0), 
                                 nil, 
@@ -79,7 +82,7 @@ function Dueler:Duel(dueler1, dueler2)
 
     -- Resolving duel position
     local duelpoint = Vector(RandomFloat(-WORLD_XBOUND, WORLD_XBOUND), RandomFloat(-WORLD_YBOUND, WORLD_YBOUND), 0)
-    local vectorOffset = RandomVector(75)
+    local vectorOffset = RandomVector(math.random(150,300)/2)
 
     local dueler1pos = duelpoint + vectorOffset
     local dueler2pos = duelpoint - vectorOffset

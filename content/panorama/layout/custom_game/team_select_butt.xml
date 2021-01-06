@@ -179,6 +179,8 @@
 									 maxchars="5" unit="s"/>
 						<Label text="Dash Time" class="TextEntryLabel"/>
 					</Panel>
+					<ToggleButton id="DUEL_BUILDINGS" class="SettingsItem" text="Can Duel Buildings"
+									onactivate="onPanelChange('DUEL_BUILDINGS')"/>
 					<ToggleButton id="MEME" class="SettingsItem" text="Meme"
 									onactivate="onPanelChange('MEME')"/>
 				</Panel>

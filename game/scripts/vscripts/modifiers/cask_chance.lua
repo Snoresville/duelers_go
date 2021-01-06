@@ -16,7 +16,7 @@ function cask_chance:OnCreated()
 end
 
 function cask_chance:OnIntervalThink()
-	local newChance = math.min(self.chance + (self:GetParent():GetLevel() - 1) * BUTTINGS.CASK_CHANCE_LEVEL, CASK_CHANCE_LIMIT)
+	local newChance = math.min(self.chance + (self:GetParent():GetLevel() - 1) * BUTTINGS.CASK_CHANCE_LEVEL, BUTTINGS.CASK_CHANCE_LIMIT)
 	self:SetStackCount(newChance)
 end
 

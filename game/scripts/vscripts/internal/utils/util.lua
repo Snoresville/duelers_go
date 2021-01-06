@@ -419,3 +419,11 @@ function opairs(t)
     -- in order
     return orderedNext, t, nil
 end
+
+function HasBit(checker, value)
+    local checkVal = checker
+    if type(checkVal) == 'userdata' then
+        checkVal = tonumber(checker:ToHexString(), 16)
+    end
+    return bit.band( checkVal, tonumber(value)) == tonumber(value)
+end

@@ -52,6 +52,7 @@ BUTTINGS = {
 	DASH_TIME = 3,						-- How long heroes have to travel to duel their opponent.
 
 	MEME = 0,
+	DUEL_BUILDINGS = 0,
 
 	CASK_CHANCE_BASE = 15,				-- Base Chance for cask to be released
 	CASK_BOUNCE_BASE = 3,				-- Amount of bounces

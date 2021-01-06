@@ -113,7 +113,7 @@
 							  "value62"			"sounds/boundless"
                         }
                     }
-                    "volume"            {   "value"     "1.7000"   }
+                    "volume"            {   "value"     "1.3000"   }
                     "pitch_rand_min"    {   "value"     "-0.00000"  }
                     "pitch_rand_max"    {   "value"     "0.000000"  }
                     "pitch"             {   "value"     "1.000000"  }

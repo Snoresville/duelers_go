@@ -17,6 +17,7 @@ ListenToGameEvent("entity_killed", function(keys)
 		if BUTTINGS.MEME then
 			EmitGlobalSound("skrillex")
 		end
+		PlayerResource:GetSelectedHeroEntity(killedUnit:GetPlayerOwnerID()):SetTimeUntilRespawn( 5 )
 		-- when a hero dies
 	end
 
