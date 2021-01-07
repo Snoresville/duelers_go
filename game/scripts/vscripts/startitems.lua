@@ -36,9 +36,7 @@ ListenToGameEvent("npc_first_spawn",function(kv)
 	-- Abilities
 
 	for abil,kv in pairs(bonusabilities) do
-		print(BUTTINGS.MEME == nil)
-		print(BUTTINGS.MEME == 0)
-		if abil == "cask_projectile" and (BUTTINGS.MEME == nil or BUTTINGS.MEME == 0) then break end
+		if abil == "cask_projectile" and (BUTTINGS.MEME == 0) then break end
 		if (not kv.nokey) then hero:RemoveAbility("generic_hidden") end
 		local a = hero:AddAbility(abil)
 		a:SetLevel(kv.level or kv.lvl or 0)
@@ -67,6 +65,9 @@ ListenToGameEvent("npc_first_spawn",function(kv)
 	-- Modifiers
 
 	for name,data in pairs(bonusmodifier) do
+		print(BUTTINGS.MEME)
+		print(BUTTINGS.MEME == 0)
+		if BUTTINGS.MEME == 0 then break end
 		hero:AddNewModifierButt(hero, nil, name, data)
 	end
 

@@ -111,9 +111,10 @@
 							  "value60"			"sounds/skrillex/energysynergymatrix3"
 							  "value61"			"sounds/skrillex/unravel"
 							  "value62"			"sounds/skrillex/boundless"
+							  "value63"			"sounds/skrillex/dropthebomb"
                         }
                     }
-                    "volume"            {   "value"     "1.3000"   }
+                    "volume"            {   "value"     "0.8000"   }
                     "pitch_rand_min"    {   "value"     "-0.00000"  }
                     "pitch_rand_max"    {   "value"     "0.000000"  }
                     "pitch"             {   "value"     "1.000000"  }

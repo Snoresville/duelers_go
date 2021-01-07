@@ -48,7 +48,7 @@ BUTTINGS = {
 	BUYBACK_LIMIT = 1,                  -- Max amount of buybacks
 	BUYBACK_COOLDOWN = 600,             -- Cooldown for buyback
 
-	DUEL_DELAY = 20,					-- Delay between duels in seconds.
+	DUEL_DELAY = 30,					-- Delay between duels in seconds.
 	DASH_TIME = 3,						-- How long heroes have to travel to duel their opponent.
 
 	MEME = 0,
