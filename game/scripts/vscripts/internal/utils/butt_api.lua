@@ -164,7 +164,6 @@ function TeamList:GetPlayableTeams()
 	return out
 end
 
-
 function TeamList:GetFreeCouriers()
 	for t,hero in pairs(HeroListButt:GetOneHeroPerTeam()) do
 		if (not PlayerResource:GetNthCourierForTeam(0,t)) then
@@ -192,7 +191,6 @@ function TeamList:GetTotalEarnedXP()
 	end
 	return out
 end
-
 
 ---------------------
 -- TeamResource --
@@ -286,6 +284,30 @@ function CDOTA_BaseNPC:RemoveItemByName( itemName )
 	end
 end
 
+function CDOTA_BaseNPC:FullySetTeam( playerID, hero, int_newTeam, b_includeSummons )
+
+	local oldTeam = hero:GetTeam()
+	local oldTeamMaxPlayers = GameRules:GetCustomGameTeamMaxPlayers(oldTeam)
+	local newTeamMaxPlayers = GameRules:GetCustomGameTeamMaxPlayers( int_newTeam )
+
+	GameRules:SetCustomGameTeamMaxPlayers( oldTeam, oldTeamMaxPlayers - 1 )
+	GameRules:SetCustomGameTeamMaxPlayers( int_newTeam, newTeamMaxPlayers + 1 )
+
+	PlayerResource:SetCustomTeamAssignment( playerID, int_newTeam )
+	hero:SetTeam( int_newTeam )
+	hero:SetPlayerID( playerID )
+	PlayerResource:UpdateTeamSlot( playerID, int_newTeam, PlayerResource:GetPlayerCountForTeam( int_newTeam ) ) -- update top bar
+
+	if b_includeSummons then
+		local summons = hero:GetAdditionalOwnedUnits()
+		for i=1,#summons do
+			summons[i]:SetTeam( int_newTeam )
+		end
+	end
+
+	return true
+end
+
 ------------
 -- Global --
 ------------
@@ -359,4 +381,25 @@ end
 
 function IsMonkeyKingClone(unit)
 	return unit:HasModifier("modifier_monkey_king_fur_army_soldier_hidden")
+end
+
+local buildings = {
+	"npc_dota_tower",
+	"ent_dota_fountain",
+	"npc_dota_barracks",
+	"npc_dota_fort",
+	"npc_dota_filler",
+	"npc_dota_roshan",
+}
+
+function Butt:AllBuildings()
+	local towers = {}
+	for _,towerName in ipairs(buildings) do
+		local tTowers = Entities:FindAllByClassname(towerName)
+		for __, building in pairs(tTowers) do
+			table.insert(towers, building)
+		end
+	end
+
+	return towers
 end

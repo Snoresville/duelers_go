@@ -20,7 +20,7 @@ ListenToGameEvent("created_game_mode_entity",function()
 	gameModeEnt:SetBotsMaxPushTier( -1 )						-- Set the max tier of tower that bots want to push. (-1 to disable) 
 	gameModeEnt:SetBotThinkingEnabled( false )					-- Enables/Disables bot thinking. Requires a very Dota PvP-like map with 3 lanes, a shop, etc. 
 	gameModeEnt:SetBuybackEnabled( true )						-- Enables or disables buyback completely 
-	gameModeEnt:SetCameraDistanceOverride( 1134 )				-- Set a different camera distance; dota default is 1134. 
+	-- gameModeEnt:SetCameraDistanceOverride( 1354 )				-- Set a different camera distance; dota default is 1134. 
 	gameModeEnt:SetCustomBuybackCooldownEnabled( false )		-- Turns on capability to define custom buyback cooldowns. 
 	gameModeEnt:SetCustomBuybackCostEnabled( false )			-- Turns on capability to define custom buyback costs. 
 	gameModeEnt:SetFixedRespawnTime( -1 ) 						-- Sets the dota respawn time. -1 for default behavior 
@@ -41,13 +41,20 @@ ListenToGameEvent("created_game_mode_entity",function()
 	gameModeEnt:SetUnseenFogOfWarEnabled( false )				-- black starting map
 
 
-	if false then -- set true to use custom rules
-		gameModeEnt:SetUseDefaultDOTARuneSpawnLogic(false)		-- true = river runes spawn at 2:00, all runes. false = required to disable runes, they start at 0:00
+	if true then -- set false to use custom rules after 'else'
+		gameModeEnt:SetUseDefaultDOTARuneSpawnLogic(true)		-- true = uses default dota rune rules for bounty runes, river runes and wisdom runes.
+	else
+		gameModeEnt:SetUseDefaultDOTARuneSpawnLogic(false)		 --false = required to disable runes, they start at 0:00 and spawn power runes on all rune spots of the map.
 		gameModeEnt:SetRuneEnabled(DOTA_RUNE_DOUBLEDAMAGE, true)
 		gameModeEnt:SetRuneEnabled(DOTA_RUNE_HASTE, true)
 		gameModeEnt:SetRuneEnabled(DOTA_RUNE_ILLUSION, true)
 		gameModeEnt:SetRuneEnabled(DOTA_RUNE_INVISIBILITY, true)
-		-- this is broken, therefore always true: gameModeEnt:SetRuneEnabled(DOTA_RUNE_REGENERATION, true)
+		gameModeEnt:SetRuneEnabled(DOTA_RUNE_REGENERATION, true)
+		gameModeEnt:SetRuneEnabled(DOTA_RUNE_BOUNTY, true)
+		gameModeEnt:SetRuneEnabled(DOTA_RUNE_ARCANE, true)
+		gameModeEnt:SetRuneEnabled(DOTA_RUNE_WATER, true)
+		gameModeEnt:SetRuneEnabled(DOTA_RUNE_XP, true)
+		gameModeEnt:SetRuneEnabled(DOTA_RUNE_SHIELD, true)
 	end
 
 	if false then -- set true to use custom colors

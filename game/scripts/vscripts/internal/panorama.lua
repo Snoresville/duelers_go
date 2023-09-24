@@ -26,29 +26,40 @@ local TABLE_NAMES = {
 
 
 ListenToGameEvent("addon_game_mode_spawn", function()
-	CustomNetTables:SetTableValue("butt_settings", "default", BUTTINGS)
+	CustomNetTables:SetTableValue("butt_settings", "updated", BUTTINGS)
 end, nil)
 
+function split (inputstr, sep)
+	if sep == nil then
+			sep = "%s"
+	end
+	local t={}
+	for str in string.gmatch(inputstr, "([^"..sep.."]+)") do
+			table.insert(t, str)
+	end
+	return t
+end
+
+
 local l0 = CustomGameEventManager:RegisterListener("butt_setting_changed", function(_,kv)
-	BUTTINGS[kv.setting] = kv.value
-	print(kv.setting,":",kv.value)
+	local t = split(kv.setting,"&")
+	local pointer = BUTTINGS;
+
+	for i = 1, #t - 1 do
+		pointer = pointer[t[i]]
+	end
+	local pre = pointer[t[#t]]
+	pointer[t[#t]] = kv.value
+
+	CustomNetTables:SetTableValue("butt_settings", "updated", BUTTINGS)
+	print(kv.setting,": from ",pre," to ",kv.value)
 end)
 
 local l1 =ListenToGameEvent("game_rules_state_change", function()
 	if (GameRules:State_Get()==DOTA_GAMERULES_STATE_HERO_SELECTION) then
-		CustomNetTables:SetTableValue("butt_settings", "locked", BUTTINGS)
+		CustomNetTables:SetTableValue("butt_settings", "updated", BUTTINGS)
 	end
 end, nil)
-
-local l2 = CustomGameEventManager:RegisterListener("butt_on_clicked", function(_,kv)
-	local name = kv.button
-	if ("RESET"==name) then
-		-- BUTTINGS = table.copy(BUTTINGS_DEFAULT)
-		for k,v in pairs(BUTTINGS_DEFAULT) do
-			CustomGameEventManager:Send_ServerToAllClients("butt_setting_changed", {setting = k, value = v})
-		end
-	end
-end)
 
 if IsInToolsMode() then -- Item Editor
 	local kvs = {}
@@ -133,7 +144,7 @@ CustomGameEventManager:RegisterListener("endscreen_butt", function(_,request)
 			playerInfo[pID].GPM = math.floor(PlayerResource:GetGoldPerMin(pID)+0.5)
 			playerInfo[pID].EPM = math.floor(PlayerResource:GetXPPerMin(pID)+0.5)
 			playerInfo[pID].TotalXP = PlayerResource:GetTotalEarnedXP(pID)
-			playerInfo[pID].DamageTaken = PlayerResource:GetCreepDamageTaken(pID) + PlayerResource:GetHeroDamageTaken(pID) + PlayerResource:GetTowerDamageTaken(pID)
+			playerInfo[pID].DamageTaken = PlayerResource:GetCreepDamageTaken(pID, true) + PlayerResource:GetHeroDamageTaken(pID, true) + PlayerResource:GetTowerDamageTaken(pID, true)
 			playerInfo[pID].GetGoldSpentOnItems = PlayerResource:GetGoldSpentOnItems(pID)
 			playerInfo[pID].RunePickups = PlayerResource:GetRunePickups(pID)
 		end

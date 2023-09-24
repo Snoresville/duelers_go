@@ -15,15 +15,15 @@ function dueler_movement:OnCreated(kv)
     Timers:CreateTimer(FrameTime(), function()
         self.target_point = Vector(kv.x, kv.y, GetGroundHeight(self:GetParent():GetAbsOrigin(), self:GetParent()))
         self.distance = (self:GetCaster():GetAbsOrigin() - self.target_point):Length2D()
-        self.dash_time = BUTTINGS.DASH_TIME -- prevents yeeting mid-duel
+        self.dash_time =  math.min(Buttings:GetValue("CUSTOM_GAME_OPTIONS", "DASH_TIME"), Buttings:GetValue("CUSTOM_GAME_OPTIONS", "DUEL_DELAY") - 5) -- prevents yeeting mid-duel
         self.dash_speed = self.distance / self.dash_time
         self.direction = (self.target_point - self:GetCaster():GetAbsOrigin()):Normalized()
 
 		--Add dash particle
 		local dash = ParticleManager:CreateParticle("particles/units/heroes/hero_pangolier/pangolier_swashbuckler_dash.vpcf", PATTACH_ABSORIGIN_FOLLOW, self:GetParent())
-        ParticleManager:SetParticleControl(dash, 0, self:GetParent():GetAbsOrigin()) -- point 0: origin, point 2: sparkles, point 5: burned soil
-        ParticleManager:SetParticleControl(dash, 2, self:GetParent():GetAbsOrigin()) -- point 0: origin, point 2: sparkles, point 5: burned soil
-        ParticleManager:SetParticleControl(dash, 5, self:GetParent():GetAbsOrigin()) -- point 0: origin, point 2: sparkles, point 5: burned soil
+        ParticleManager:SetParticleControl(dash, 0, self:GetParent():GetAbsOrigin()) -- point 0: origin
+        ParticleManager:SetParticleControl(dash, 2, self:GetParent():GetAbsOrigin()) -- point 2: sparkles
+        ParticleManager:SetParticleControl(dash, 5, self:GetParent():GetAbsOrigin()) -- point 5: burned soil
 		self:AddParticle(dash, false, false, -1, true, false)
 
         self.frametime = FrameTime()

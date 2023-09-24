@@ -4,9 +4,7 @@ ListenToGameEvent("game_rules_state_game_in_progress", function()
     if IsClient() then return end
 
     print("Dueling may now commence")
-    BUTTINGS.DUEL_DELAY = math.max(BUTTINGS.DUEL_DELAY, 1 + 5)
-    BUTTINGS.DASH_TIME = math.min(BUTTINGS.DASH_TIME, BUTTINGS.DUEL_DELAY - 5)
-	Timers:CreateTimer( BUTTINGS.DUEL_DELAY or 15, Dueler.Trigger )
+	Timers:CreateTimer( Buttings:GetValue("CUSTOM_GAME_OPTIONS", "DUEL_DELAY"), Dueler.Trigger )
 end, GameMode)
 
 WORLD_XBOUND = 7200
@@ -37,7 +35,7 @@ function Dueler:Trigger()
         Dueler:Duel(Dueler.radiant[i], Dueler.dire[i])
     end
 
-	return BUTTINGS.DUEL_DELAY
+	return Buttings:GetValue("CUSTOM_GAME_OPTIONS", "DUEL_DELAY")
 end
 
 function Dueler:Duel(dueler1, dueler2)
@@ -50,8 +48,8 @@ function Dueler:Duel(dueler1, dueler2)
             print("WE CALLED DUEL WITH NO DUELERS??")
             return 
         end
-        local targetFlag = DOTA_UNIT_TARGET_BASIC --+ 
-        if BUTTINGS.DUEL_BUILDINGS == 1 then
+        local targetFlag = DOTA_UNIT_TARGET_BASIC --+
+        if Buttings:GetValue("CUSTOM_GAME_OPTIONS", "DUEL_BUILDINGS") == 1 then
             targetFlag = targetFlag + DOTA_UNIT_TARGET_BUILDING
         end
         dueler2 = FindUnitsInRadius( dueler1:GetTeamNumber(), 

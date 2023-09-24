@@ -184,6 +184,16 @@ function table.length(t)
 	return len
 end
 
+function table.contains(t, v)
+	if ("table"~=type(t)) then error("1st argument of table.contains() is not a table",2) end
+	for _,v2 in pairs(t) do
+		if v==v2 then
+			return true
+		end
+	end
+	return false
+end
+
 -------------------------- FILE COPY FUNCTIONS -------------------------
 
 function copyFile(fromFile, toFile)
@@ -418,12 +428,4 @@ function opairs(t)
     -- Equivalent of the pairs() function on tables. Allows to iterate
     -- in order
     return orderedNext, t, nil
-end
-
-function HasBit(checker, value)
-    local checkVal = checker
-    if type(checkVal) == 'userdata' then
-        checkVal = tonumber(checker:ToHexString(), 16)
-    end
-    return bit.band( checkVal, tonumber(value)) == tonumber(value)
 end

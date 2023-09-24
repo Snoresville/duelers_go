@@ -6,10 +6,10 @@ local vUserIds = {}
 local cheatStart
 
 ListenToGameEvent("player_connect_full", function(keys)
-	local entIndex = keys.index + 1
-	local ply = EntIndexToHScript(keys.index + 1)
-	local userID = keys.userid
-	vUserIds[userID] = EntIndexToHScript(keys.index + 1)
+	for k,v in pairs(keys) do print(k,v) end
+
+	local ply = EntIndexToHScript(keys.index)
+	vUserIds[keys.userid] = ply
 end, nil)
 
 ListenToGameEvent("player_chat", function(keys)
@@ -18,6 +18,7 @@ ListenToGameEvent("player_chat", function(keys)
 	local playerID = vUserIds[userID] and vUserIds[userID]:GetPlayerID() -- attempt to index a nil value
 	local hero = playerID and PlayerResource:GetSelectedHeroEntity(playerID)
 	local text = keys.text
+	
 	if ("-mods"==text) and (playerID) then
 		if (hero) then
 			for m,mod in pairs(hero:FindAllModifiers()) do
